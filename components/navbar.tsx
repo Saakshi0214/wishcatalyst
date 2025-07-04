@@ -8,9 +8,17 @@ import { Menu, Sun, Moon } from "lucide-react"
 import Link from "next/link"
 import Image from "next/image"
 import { useTheme } from "./theme-provider"
+import { 
+  SignedOut, 
+  SignUpButton, 
+  SignInButton, 
+  UserButton, 
+  SignedIn 
+} from "@clerk/nextjs"
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false)
+  
   const { theme, toggleTheme } = useTheme()
 
   const navItems = [
@@ -61,11 +69,31 @@ export default function Navbar() {
             >
               {theme === "dark" ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
             </Button>
-            <Button asChild className="gradient-primary text-white font-bold hover:scale-105 shadow-lg">
-              <Link href="/login">Login</Link>
-            </Button>
+            <SignedOut>
+              <SignInButton>
+                <Button variant="outline" className="border-primary text-primary hover:bg-primary hover:text-white font-bold hover:scale-105 shadow-lg">
+                  Login
+                </Button>
+              </SignInButton>
+              <SignUpButton>
+                <Button className="gradient-primary text-white font-bold hover:scale-105 shadow-lg">
+                  Sign Up
+                </Button>
+              </SignUpButton>
+            </SignedOut>
+            <SignedIn>
+              <UserButton 
+                appearance={{
+                  elements: {
+                    avatarBox: {
+                      width: "40px",
+                      height: "40px"
+                    }
+                  }
+                }}
+              />
+            </SignedIn>
           </div>
-
           {/* Mobile Navigation */}
           <Sheet open={isOpen} onOpenChange={setIsOpen}>
             <SheetTrigger asChild className="md:hidden">
@@ -93,11 +121,30 @@ export default function Navbar() {
                 >
                   {theme === "dark" ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
                 </Button>
-                <Button asChild className="gradient-primary text-white font-bold shadow-lg">
-                  <Link href="/login" onClick={() => setIsOpen(false)}>
-                    Login
-                  </Link>
-                </Button>
+                <SignedOut>
+                  <SignInButton>
+                    <Button variant="outline" className="border-primary text-primary hover:bg-primary hover:text-white font-bold shadow-lg" onClick={() => setIsOpen(false)}>
+                      Login
+                    </Button>
+                  </SignInButton>
+                  <SignUpButton>
+                    <Button className="gradient-primary text-white font-bold shadow-lg" onClick={() => setIsOpen(false)}>
+                      Sign Up
+                    </Button>
+                  </SignUpButton>
+                </SignedOut>
+                <SignedIn>
+                  <UserButton 
+                    appearance={{
+                      elements: {
+                        avatarBox: {
+                          width: "40px",
+                          height: "40px"
+                        }
+                      }
+                    }}
+                  />
+                </SignedIn>
               </div>
             </SheetContent>
           </Sheet>

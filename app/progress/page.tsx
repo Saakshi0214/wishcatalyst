@@ -17,7 +17,8 @@ export default function ProgressPage() {
         "Created and distributed informational pamphlets to raise awareness about our educational services across West Bengal communities",
       icon: FileText,
       status: "completed",
-      image: "/placeholder.svg?height=300&width=400",
+      image: "/study-materials.png?height=300&width=400",
+    
       details: "Distributed 5,000+ pamphlets across 20+ locations",
     },
     {

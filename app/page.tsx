@@ -60,7 +60,6 @@ export default function HomePage() {
           >
             <h3 style={{fontFamily:'unset'}}>Bridging the gap between education and employment through quality home and online tuitions</h3>
           </motion.p>
-
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}

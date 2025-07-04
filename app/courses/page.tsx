@@ -1,5 +1,4 @@
 "use client"
-
 import { motion } from "framer-motion"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
@@ -96,7 +95,6 @@ export default function CoursesPage() {
       popular: false,
     },
   ]
-
   return (
     <div className="min-h-screen bg-background text-foreground">
       <Navbar />
@@ -120,6 +118,7 @@ export default function CoursesPage() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, ease: "easeOut" }}
               className="text-center"
+              
             >
               <h1 className="text-6xl md:text-8xl font-black mb-6 text-slate-900 dark:text-white tracking-tight">
                 OUR COURSES
