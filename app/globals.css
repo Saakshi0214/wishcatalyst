@@ -1,0 +1,251 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Light theme - Clean and Professional with Better Contrast */
+    --background: 0 0% 100%; /* Pure white */
+    --foreground: 222.2 84% 4.9%; /* Pure black for better readability */
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 84% 4.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 84% 4.9%;
+    --primary: 221.2 83.2% 53.3%; /* Blue 500 */
+    --primary-foreground: 210 40% 98%;
+    --secondary: 210 40% 96%; /* Slate 100 */
+    --secondary-foreground: 222.2 84% 4.9%;
+    --accent: 210 40% 96%; /* Slate 50 */
+    --accent-foreground: 222.2 84% 4.9%;
+    --muted: 210 40% 96%;
+    --muted-foreground: 215.4 16.3% 46.9%; /* Darker muted text */
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 221.2 83.2% 53.3%;
+    --radius: 0.75rem;
+  }
+
+  .dark {
+    /* Dark theme - Bold and Modern */
+    --background: 222.2 84% 4.9%; /* Very dark blue */
+    --foreground: 210 40% 98%; /* Slate 50 */
+    --card: 222.2 84% 4.9%; /* Slate 900 */
+    --card-foreground: 210 40% 98%;
+    --popover: 222.2 84% 4.9%;
+    --popover-foreground: 210 40% 98%;
+    --primary: 217.2 91.2% 59.8%; /* Blue 500 */
+    --primary-foreground: 222.2 84% 4.9%;
+    --secondary: 217.2 32.6% 17.5%; /* Slate 800 */
+    --secondary-foreground: 210 40% 98%;
+    --accent: 217.2 32.6% 17.5%; /* Slate 700 */
+    --accent-foreground: 210 40% 98%;
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 224.3 76.3% 94.1%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+    scroll-behavior: smooth; /* Smooth scrolling */
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: "Times New Roman", "Times", serif;
+    font-weight: 700;
+    letter-spacing: -0.025em;
+    color: rgb(0 0 0); /* Pure black in light mode */
+  }
+
+  .dark h1,
+  .dark h2,
+  .dark h3,
+  .dark h4,
+  .dark h5,
+  .dark h6 {
+    color: rgb(248 250 252); /* White in dark mode */
+  }
+
+  /* Better text contrast in light mode */
+  p,
+  span,
+  div {
+    color: rgb(0 0 0); /* Black text in light mode */
+  }
+
+  .dark p,
+  .dark span,
+  .dark div {
+    color:'black' /* rgb(248 250 252); White text in dark mode */
+  }
+
+  /* Muted text with better contrast */
+  .text-muted-foreground {
+    color: rgb(51 65 85) !important; /* Darker in light mode */
+  }
+
+  .dark .text-muted-foreground {
+    color: rgb(148 163 184) !important; /* Lighter in dark mode */
+  }
+}
+
+/* Enhanced animations */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.animate-fadeInUp {
+  animation: fadeInUp 0.8s ease-out;
+}
+
+.animate-slideInLeft {
+  animation: slideInLeft 0.8s ease-out;
+}
+
+.animate-slideInRight {
+  animation: slideInRight 0.8s ease-out;
+}
+
+.animate-scaleIn {
+  animation: scaleIn 0.6s ease-out;
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #c1c1c1;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #a8a8a8;
+}
+
+/* Gradient backgrounds */
+.gradient-primary {
+  background:'#facaf4' /*inear-gradient(135deg, hsl(var(--primary)) 0%, hsl(var(--primary) / 0.8) 100%); */
+}
+
+.gradient-hero-light {
+  background: linear-gradient(135deg, rgba(59, 130, 246, 0.1) 0%, rgba(147, 197, 253, 0.1) 100%);
+}
+
+.gradient-hero-dark {
+  background: linear-gradient(135deg, rgba(15, 23, 42, 0.9) 0%, rgba(30, 41, 59, 0.9) 100%);
+}
+
+/* Hero overlay patterns */
+.hero-pattern {
+  background-image: radial-gradient(circle at 25% 25%, rgba(59, 130, 246, 0.1) 0%, transparent 50%),
+    radial-gradient(circle at 75% 75%, rgba(147, 197, 253, 0.1) 0%, transparent 50%);
+}
+
+.dark .hero-pattern {
+  background-image: radial-gradient(circle at 25% 25%, rgba(59, 130, 246, 0.2) 0%, transparent 50%),
+    radial-gradient(circle at 75% 75%, rgba(30, 41, 59, 0.3) 0%, transparent 50%);
+}
+
+/* Enhanced image visibility for both light and dark modes */
+.hero-image {
+  opacity: 0.9; /* Much more visible in light mode */
+  mix-blend-mode: normal;
+  filter: brightness(1.1) contrast(1.1); /* Enhanced visibility */
+}
+
+.dark .hero-image {
+  opacity: 0.8; /* More visible in dark mode */
+  mix-blend-mode: normal;
+  filter: brightness(1.2) contrast(1.2); /* Enhanced brightness and contrast in dark mode */
+}
+
+/* Additional image visibility classes */
+.image-visible {
+  opacity: 0.95; /* Very visible */
+  mix-blend-mode: normal;
+  filter: brightness(1.05) contrast(1.05);
+}
+
+.dark .image-visible {
+  opacity: 0.85; /* More visible in dark mode */
+  mix-blend-mode: normal;
+  filter: brightness(1.3) contrast(1.2);
+}
