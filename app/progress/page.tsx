@@ -4,9 +4,7 @@ import { motion } from "framer-motion"
 import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { FileText, Users, MapPin, BarChart, Handshake, CheckCircle, Clock, Target } from "lucide-react"
-import Navbar from "@/components/navbar"
-import Image from "next/image"
-import SimpleFooter from "@/components/simple-footer"
+
 
 export default function ProgressPage() {
   const progressSteps = [
@@ -17,8 +15,7 @@ export default function ProgressPage() {
         "Created and distributed informational pamphlets to raise awareness about our educational services across West Bengal communities",
       icon: FileText,
       status: "completed",
-      image: "/study-materials.png?height=300&width=400",
-    
+      image: "/g.jpeg?height=300&width=400",
       details: "Distributed 5,000+ pamphlets across 20+ locations",
     },
     {
@@ -28,7 +25,7 @@ export default function ProgressPage() {
         "Partnered with local NGOs to expand our reach and impact in underserved communities, focusing on educational equity",
       icon: Users,
       status: "completed",
-      image: "/placeholder.svg?height=300&width=400",
+      image: "/a.jpeg?height=300&width=400",
       details: "Partnership with 3 major NGOs established",
     },
     {
@@ -38,7 +35,7 @@ export default function ProgressPage() {
         "Providing home tuitions in different parts of West Bengal to make quality education accessible to all students",
       icon: MapPin,
       status: "in-progress",
-      image: "/placeholder.svg?height=300&width=400",
+      image: "/v.jpeg?height=300&width=400",
       details: "Currently serving 15+ areas with 200+ active students",
     },
     {
@@ -48,7 +45,7 @@ export default function ProgressPage() {
         "Gathering comprehensive feedback through surveys to improve our services, methodology, and student satisfaction",
       icon: BarChart,
       status: "in-progress",
-      image: "/placeholder.svg?height=300&width=400",
+      image: "/s.jpeg?height=300&width=400",
       details: "500+ responses collected, analysis ongoing",
     },
     {
@@ -58,7 +55,7 @@ export default function ProgressPage() {
         "Building strategic partnerships with educational institutions, technology companies, and other businesses",
       icon: Handshake,
       status: "planned",
-      image: "/placeholder.svg?height=300&width=400",
+      image: "/f.jpeg?height=300&width=400",
       details: "Targeting 10+ strategic partnerships",
     },
   ]
@@ -83,9 +80,9 @@ export default function ProgressPage() {
         }
       case "planned":
         return {
-          color: "bg-coral-500 dark:bg-orange-400",
-          textColor: "text-coral-700 dark:text-orange-300",
-          bgColor: "bg-coral-50 dark:bg-orange-900/20",
+          color: "bg-orange-500 dark:bg-orange-400",
+          textColor: "text-orange-700 dark:text-orange-300",
+          bgColor: "bg-orange-50 dark:bg-orange-900/20",
           icon: Target,
           text: "Planned",
         }
@@ -101,22 +98,12 @@ export default function ProgressPage() {
   }
 
   return (
-    <div className="min-h-screen bg-background text-foreground font-inter">
-      <Navbar />
-
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100 dark:from-slate-900 dark:to-slate-800">
       <div className="pt-20">
         {/* Hero Section */}
-        <section className="py-20 relative overflow-hidden">
-          <div className="absolute inset-0">
-            <Image
-              src="/placeholder.svg?height=800&width=1920"
-              alt="Progress and growth in education"
-              fill
-              className="object-cover"
-            />
-            <div className="absolute inset-0 bg-gradient-to-br from-indigo-900/90 via-purple-900/80 to-coral-900/90 dark:from-slate-900/95 dark:via-purple-900/90 dark:to-orange-900/95" />
-          </div>
-
+        <section className="py-20 relative overflow-hidden" style={{background: 'linear-gradient(135deg, #1e3c72 0%, #2a5298 50%, #3b82f6 100%)'}}>
+          <div className="absolute inset-0 bg-gradient-to-r from-black/10 to-transparent" />
+          
           <div className="container mx-auto px-4 relative z-10">
             <motion.div
               initial={{ opacity: 0, y: 50 }}
@@ -124,10 +111,10 @@ export default function ProgressPage() {
               transition={{ duration: 1 }}
               className="text-center mb-16"
             >
-              <h1 className="text-6xl md:text-7xl font-black mb-6 bg-gradient-to-r from-white via-indigo-200 to-coral-200 bg-clip-text text-transparent">
+              <h1 className="text-6xl md:text-7xl font-black mb-6 text-white drop-shadow-lg">
                 Progress Overview
               </h1>
-              <p className="text-xl text-gray-200 max-w-3xl mx-auto font-medium">
+              <p className="text-xl text-white/90 max-w-3xl mx-auto font-medium">
                 Track our journey as we work towards transforming education and creating opportunities for every student
               </p>
             </motion.div>
@@ -175,8 +162,8 @@ export default function ProgressPage() {
                                 {step.number}
                               </span>
                             </div>
-                            <h3 className="text-2xl font-black mb-4 text-foreground">{step.title}</h3>
-                            <p className="text-muted-foreground mb-4 leading-relaxed text-lg">{step.description}</p>
+                            <h3 className="text-2xl font-black mb-4 text-slate-900 dark:text-white">{step.title}</h3>
+                            <p className="text-slate-600 dark:text-slate-400 mb-4 leading-relaxed text-lg">{step.description}</p>
                             <div
                               className={`${statusConfig.textColor} font-semibold text-sm bg-white/50 dark:bg-slate-800/50 px-3 py-2 rounded-lg inline-block`}
                             >
@@ -186,25 +173,33 @@ export default function ProgressPage() {
                         </Card>
                       </div>
 
-                      {/* Image */}
+                      {/* Image/Icon */}
                       <div className="flex-1 w-full">
                         <motion.div
                           whileHover={{ scale: 1.05 }}
-                          className="relative overflow-hidden rounded-2xl shadow-2xl"
+                          className="relative overflow-hidden rounded-2xl shadow-2xl bg-gradient-to-br from-indigo-100 to-purple-100 dark:from-slate-800 dark:to-slate-700"
                         >
-                          <Image
-                            src={step.image || "/placeholder.svg"}
-                            alt={step.title}
-                            width={400}
-                            height={300}
-                            className="w-full h-64 object-cover"
-                          />
-                          <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
+                          {step.image ? (
+                            <div className="w-full h-64 relative">
+                              <img
+                                src={step.image}
+                                alt={step.title}
+                                className="w-full h-full object-cover"
+                              />
+                              <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
+                            </div>
+                          ) : (
+                            <div className="w-full h-64 flex items-center justify-center">
+                              <div
+                                className={`w-24 h-24 rounded-xl bg-gradient-to-br from-indigo-500 to-purple-600 dark:from-purple-500 dark:to-orange-500 flex items-center justify-center shadow-lg`}
+                              >
+                                <step.icon className="h-12 w-12 text-white" />
+                              </div>
+                            </div>
+                          )}
                           <div className="absolute bottom-4 left-4">
-                            <div
-                              className={`w-12 h-12 rounded-xl bg-gradient-to-br from-indigo-500 to-purple-600 dark:from-purple-500 dark:to-orange-500 flex items-center justify-center shadow-lg`}
-                            >
-                              <step.icon className="h-6 w-6 text-white" />
+                            <div className="text-white font-bold text-sm bg-black/50 px-3 py-1 rounded-lg">
+                              Step {step.number}
                             </div>
                           </div>
                         </motion.div>
@@ -217,8 +212,8 @@ export default function ProgressPage() {
           </div>
         </section>
 
-        {/* Statistics Section */}
-        <section className="py-20 bg-gradient-to-r from-indigo-600 via-purple-600 to-coral-500 dark:from-purple-600 dark:via-orange-500 dark:to-cyan-500">
+        {/* Statistics Section - Updated Colors */}
+        <section className="py-20 bg-gradient-to-r from-blue-600 via-teal-500 to-green-400 dark:from-slate-800 dark:via-slate-700 dark:to-slate-600">
           <div className="container mx-auto px-4">
             <motion.h2
               initial={{ opacity: 0, y: 50 }}
@@ -255,8 +250,6 @@ export default function ProgressPage() {
           </div>
         </section>
       </div>
-
-      <SimpleFooter />
     </div>
   )
 }
