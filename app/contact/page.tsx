@@ -10,8 +10,67 @@ import { Mail, Phone, MapPin, Clock } from "lucide-react"
 import Navbar from "@/components/navbar"
 import SimpleFooter from "@/components/simple-footer"
 import Image from "next/image"
+import { useState, ChangeEvent, FormEvent } from "react"
 
 export default function ContactPage() {
+  const [formData, setFormData] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    phone: "",
+    subject: "",
+    message: ""
+  })
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [submitStatus, setSubmitStatus] = useState<"success" | "error" | null>(null)
+
+  const handleInputChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { name, value } = e.target
+    setFormData(prev => ({
+      ...prev,
+      [name]: value
+    }))
+  }
+
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+    setIsSubmitting(true)
+    setSubmitStatus(null)
+
+    const formDataToSubmit = new FormData()
+    formDataToSubmit.append("access_key", "10add910-3e50-459d-9f94-75ab1ad31ffe")
+    formDataToSubmit.append("name", `${formData.firstName} ${formData.lastName}`)
+    formDataToSubmit.append("email", formData.email)
+    formDataToSubmit.append("phone", formData.phone)
+    formDataToSubmit.append("subject", formData.subject)
+    formDataToSubmit.append("message", formData.message)
+
+    try {
+      const response = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        body: formDataToSubmit
+      })
+
+      if (response.ok) {
+        setSubmitStatus("success")
+        setFormData({
+          firstName: "",
+          lastName: "",
+          email: "",
+          phone: "",
+          subject: "",
+          message: ""
+        })
+      } else {
+        setSubmitStatus("error")
+      }
+    } catch (error) {
+      setSubmitStatus("error")
+    } finally {
+      setIsSubmitting(false)
+    }
+  }
+
   return (
     <div className="min-h-screen bg-background text-foreground font-inter">
       <Navbar />
@@ -60,67 +119,114 @@ export default function ContactPage() {
                     <CardTitle className="text-2xl text-blue-700 dark:text-blue-300">Send us a Message</CardTitle>
                   </CardHeader>
                   <CardContent className="space-y-6">
-                    <div className="grid md:grid-cols-2 gap-4">
-                      <div className="space-y-2">
-                        <Label htmlFor="firstName">First Name</Label>
-                        <Input
-                          id="firstName"
-                          placeholder="Enter your first name"
-                          className="bg-blue-50 dark:bg-slate-600 border-blue-300 dark:border-blue-500 text-foreground focus:ring-blue-500 focus:border-blue-500"
-                        />
+                    <form onSubmit={handleSubmit}>
+                      <div className="space-y-6">
+                        <div className="grid md:grid-cols-2 gap-4">
+                          <div className="space-y-2">
+                            <Label htmlFor="firstName">First Name</Label>
+                            <Input
+                              id="firstName"
+                              name="firstName"
+                              value={formData.firstName}
+                              onChange={handleInputChange}
+                              placeholder="Enter your first name"
+                              className="bg-blue-50 dark:bg-slate-600 border-blue-300 dark:border-blue-500 text-foreground focus:ring-blue-500 focus:border-blue-500"
+                              required
+                            />
+                          </div>
+                          <div className="space-y-2">
+                            <Label htmlFor="lastName">Last Name</Label>
+                            <Input
+                              id="lastName"
+                              name="lastName"
+                              value={formData.lastName}
+                              onChange={handleInputChange}
+                              placeholder="Enter your last name"
+                              className="bg-blue-50 dark:bg-slate-600 border-blue-300 dark:border-blue-500 text-foreground focus:ring-blue-500 focus:border-blue-500"
+                              required
+                            />
+                          </div>
+                        </div>
+
+                        <div className="space-y-2">
+                          <Label htmlFor="email">Email</Label>
+                          <Input
+                            id="email"
+                            name="email"
+                            type="email"
+                            value={formData.email}
+                            onChange={handleInputChange}
+                            placeholder="Enter your email"
+                            className="bg-blue-50 dark:bg-slate-600 border-blue-300 dark:border-blue-500 text-foreground focus:ring-blue-500 focus:border-blue-500"
+                            required
+                          />
+                        </div>
+
+                        <div className="space-y-2">
+                          <Label htmlFor="phone">Phone Number</Label>
+                          <Input
+                            id="phone"
+                            name="phone"
+                            type="tel"
+                            value={formData.phone}
+                            onChange={handleInputChange}
+                            placeholder="Enter your phone number"
+                            className="bg-blue-50 dark:bg-slate-600 border-blue-300 dark:border-blue-500 text-foreground focus:ring-blue-500 focus:border-blue-500"
+                          />
+                        </div>
+
+                        <div className="space-y-2">
+                          <Label htmlFor="subject">Subject</Label>
+                          <Input
+                            id="subject"
+                            name="subject"
+                            value={formData.subject}
+                            onChange={handleInputChange}
+                            placeholder="Enter subject"
+                            className="bg-blue-50 dark:bg-slate-600 border-blue-300 dark:border-blue-500 text-foreground focus:ring-blue-500 focus:border-blue-500"
+                            required
+                          />
+                        </div>
+
+                        <div className="space-y-2">
+                          <Label htmlFor="message">Message</Label>
+                          <Textarea
+                            id="message"
+                            name="message"
+                            value={formData.message}
+                            onChange={handleInputChange}
+                            placeholder="Enter your message"
+                            rows={5}
+                            className="bg-blue-50 dark:bg-slate-600 border-blue-300 dark:border-blue-500 text-foreground focus:ring-blue-500 focus:border-blue-500"
+                            required
+                          />
+                        </div>
+
+                        {submitStatus === "success" && (
+                          <div className="p-4 bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 rounded-lg">
+                            <p className="text-green-700 dark:text-green-400 font-medium">
+                              Thank you! Your message has been sent successfully.
+                            </p>
+                          </div>
+                        )}
+
+                        {submitStatus === "error" && (
+                          <div className="p-4 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg">
+                            <p className="text-red-700 dark:text-red-400 font-medium">
+                              Sorry, there was an error sending your message. Please try again.
+                            </p>
+                          </div>
+                        )}
+
+                        <Button 
+                          type="submit"
+                          disabled={isSubmitting}
+                          className="w-full bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white font-semibold hover:scale-105 shadow-lg disabled:opacity-50 disabled:cursor-not-allowed"
+                        >
+                          {isSubmitting ? "Sending..." : "Send Message"}
+                        </Button>
                       </div>
-                      <div className="space-y-2">
-                        <Label htmlFor="lastName">Last Name</Label>
-                        <Input
-                          id="lastName"
-                          placeholder="Enter your last name"
-                          className="bg-blue-50 dark:bg-slate-600 border-blue-300 dark:border-blue-500 text-foreground focus:ring-blue-500 focus:border-blue-500"
-                        />
-                      </div>
-                    </div>
-
-                    <div className="space-y-2">
-                      <Label htmlFor="email">Email</Label>
-                      <Input
-                        id="email"
-                        type="email"
-                        placeholder="Enter your email"
-                        className="bg-blue-50 dark:bg-slate-600 border-blue-300 dark:border-blue-500 text-foreground focus:ring-blue-500 focus:border-blue-500"
-                      />
-                    </div>
-
-                    <div className="space-y-2">
-                      <Label htmlFor="phone">Phone Number</Label>
-                      <Input
-                        id="phone"
-                        type="tel"
-                        placeholder="Enter your phone number"
-                        className="bg-blue-50 dark:bg-slate-600 border-blue-300 dark:border-blue-500 text-foreground focus:ring-blue-500 focus:border-blue-500"
-                      />
-                    </div>
-
-                    <div className="space-y-2">
-                      <Label htmlFor="subject">Subject</Label>
-                      <Input
-                        id="subject"
-                        placeholder="Enter subject"
-                        className="bg-blue-50 dark:bg-slate-600 border-blue-300 dark:border-blue-500 text-foreground focus:ring-blue-500 focus:border-blue-500"
-                      />
-                    </div>
-
-                    <div className="space-y-2">
-                      <Label htmlFor="message">Message</Label>
-                      <Textarea
-                        id="message"
-                        placeholder="Enter your message"
-                        rows={5}
-                        className="bg-blue-50 dark:bg-slate-600 border-blue-300 dark:border-blue-500 text-foreground focus:ring-blue-500 focus:border-blue-500"
-                      />
-                    </div>
-
-                    <Button className="w-full bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white font-semibold hover:scale-105 shadow-lg">
-                      Send Message
-                    </Button>
+                    </form>
                   </CardContent>
                 </Card>
               </motion.div>
