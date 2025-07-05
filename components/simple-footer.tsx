@@ -1,5 +1,4 @@
 "use client"
-
 import { Heart, Mail, Phone, MapPin } from "lucide-react"
 import Link from "next/link"
 
@@ -15,7 +14,6 @@ export default function SimpleFooter() {
               Your wish our motto. Quality education for all students with personalized learning experiences.
             </p>
           </div>
-
           {/* Quick Links */}
           <div className="space-y-4">
             <h4 className="text-lg font-semibold text-white">Quick Links</h4>
@@ -33,7 +31,6 @@ export default function SimpleFooter() {
               ))}
             </div>
           </div>
-
           {/* Contact Info */}
           <div className="space-y-4">
             <h4 className="text-lg font-semibold text-white">Contact Us</h4>
@@ -53,10 +50,10 @@ export default function SimpleFooter() {
             </div>
           </div>
         </div>
-
         {/* Bottom Section */}
         <div className="mt-8 pt-8 border-t border-slate-800 text-center">
-          <p className="text-slate-200 dark:text-slate-400 flex items-center justify-center space-x-2">
+          
+          <p className="text-white flex items-center justify-center space-x-2">
             <span>&copy; 2024 Wish Catalyst. Made with</span>
             <Heart className="h-4 w-4 text-red-500" />
             <span>for education</span>
