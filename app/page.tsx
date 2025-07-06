@@ -21,6 +21,7 @@ export default function HomePage() {
         <div className="absolute inset-0">
           <Image
             src="/study-materials.png"
+            
             alt="Students studying with materials and books"
             fill
             className="object-cover hero-image"
